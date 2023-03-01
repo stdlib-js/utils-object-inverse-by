@@ -205,7 +205,7 @@ console.dir( out );
 
 ## See Also
 
--   <span class="package-name">[`@stdlib/utils/object-inverse`][@stdlib/utils/object-inverse]</span><span class="delimiter">: </span><span class="description">invert an object, such that keys become values and values become keys.</span>
+-   <span class="package-name">[`@stdlib/utils-object-inverse`][@stdlib/utils/object-inverse]</span><span class="delimiter">: </span><span class="description">invert an object, such that keys become values and values become keys.</span>
 
 </section>
 
