@@ -42,7 +42,7 @@ limitations under the License.
 ## Usage
 
 ```javascript
-import invertBy from 'https://cdn.jsdelivr.net/gh/stdlib-js/utils-object-inverse-by@deno/mod.js';
+import invertBy from 'https://cdn.jsdelivr.net/gh/stdlib-js/utils-object-inverse-by@v0.2.0-deno/mod.js';
 ```
 
 #### invertBy( obj, \[options,] transform )
@@ -159,7 +159,7 @@ var out = invertBy( obj, transform );
 ```javascript
 import randu from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@deno/mod.js';
 import round from 'https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-round@deno/mod.js';
-import invertBy from 'https://cdn.jsdelivr.net/gh/stdlib-js/utils-object-inverse-by@deno/mod.js';
+import invertBy from 'https://cdn.jsdelivr.net/gh/stdlib-js/utils-object-inverse-by@v0.2.0-deno/mod.js';
 
 var keys;
 var arr;
