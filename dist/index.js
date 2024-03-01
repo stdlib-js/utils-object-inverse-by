@@ -1,5 +1,0 @@
-"use strict";var g=function(i,e){return function(){return e||i((e={exports:{}}).exports,e),e.exports}};var p=g(function(x,m){
-var q=require('@stdlib/utils-keys/dist'),y=require('@stdlib/assert-is-array/dist'),h=require('@stdlib/assert-is-plain-object/dist'),d=require('@stdlib/assert-is-object-like/dist'),b=require('@stdlib/assert-is-boolean/dist').isPrimitive,O=require('@stdlib/assert-is-function/dist'),f=require('@stdlib/assert-has-own-property/dist'),l=require('@stdlib/error-tools-fmtprodmsg/dist');function E(i,e,w){var s,v,o,r,a,t,u,c,n;if(!d(i))throw new TypeError(l('1WJES',i));if(s=!0,arguments.length===2)u=e;else{if(!h(e))throw new TypeError(l('1WJ2V',e));if(f(e,"duplicates")&&(s=e.duplicates,!b(s)))throw new TypeError(l('1WJ2o',"duplicates",s));u=w}if(!O(u))throw new TypeError(l('1WJ3q',u));if(v=q(i),o=v.length,t={},s)for(n=0;n<o;n++){if(r=v[n],a=u(r,i[r],i),!f(t,a)){t[a]=r;continue}c=t[a],y(c)?t[a].push(r):t[a]=[c,r]}else for(n=0;n<o;n++)r=v[n],a=u(r,i[r],i),t[a]=r;return t}m.exports=E
-});var T=p();module.exports=T;
-/** @license Apache-2.0 */
-//# sourceMappingURL=index.js.map
