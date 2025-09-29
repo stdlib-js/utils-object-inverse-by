@@ -35,43 +35,37 @@ limitations under the License.
 
 > Invert an object, such that keys become values and values become keys, according to a transform function.
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/utils-object-inverse-by
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-invertBy = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/utils-object-inverse-by@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var invertBy = require( 'path/to/vendor/umd/utils-object-inverse-by/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/utils-object-inverse-by@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.invertBy;
-})();
-</script>
+var invertBy = require( '@stdlib/utils-object-inverse-by' );
 ```
 
 #### invertBy( obj, \[options,] transform )
 
-Inverts an `object`, such that keys become values and values become keys, according to a `transform` function.
+Inverts an object, such that keys become values and values become keys, according to a transform function.
 
 ```javascript
 function transform( key, value ) {
@@ -85,11 +79,11 @@ var out = invertBy( obj, transform );
 // returns { 'beep': 'a', 'boop': 'b' }
 ```
 
-The function accepts the following `options`:
+The function accepts the following options:
 
--   **duplicates**: `boolean` indicating whether to store keys mapped to duplicate values in `arrays`. Default: `true`.
+-   **duplicates**: boolean indicating whether to store keys mapped to duplicate values in arrays. Default: `true`.
 
-By default, keys mapped to duplicate values are stored in `arrays`.
+By default, keys mapped to duplicate values are stored in arrays.
 
 ```javascript
 function transform( key, value ) {
@@ -103,7 +97,7 @@ var out = invertBy( obj, transform );
 // returns { 'beep': [ 'a', 'b' ] }
 ```
 
-To **not** allow duplicates, set the `duplicates` option to `false`. The output `key-value` pair will be the `key` most recently inserted into the input `object`.
+To **not** allow duplicates, set the `duplicates` option to `false`. The output key-value pair will be the key most recently inserted into the input object.
 
 ```javascript
 function transform( key, value ) {
@@ -121,7 +115,7 @@ var out = invertBy( obj, opts, transform );
 // returns { 'beep': 'c', 'boop': 'b' }
 ```
 
-The `transform` function is provided three arguments:
+The transform function is provided three arguments:
 
 -   **key**: object key.
 -   **value**: object value corresponding to `key`.
@@ -151,7 +145,7 @@ var out = invertBy( obj, transform );
 
 ## Notes
 
--   Beware when providing `objects` having values which are themselves `objects`. This function relies on native `object` serialization (`#toString`) when converting `transform` function return values to keys.
+-   Beware when providing objects having values which are themselves objects. This function relies on native object serialization (`#toString`) when converting transform function return values to keys.
 
     ```javascript
     function transform( key, value ) {
@@ -168,7 +162,7 @@ var out = invertBy( obj, transform );
     // returns { '1,2,3': 'a', '[object Object]': 'b' }
     ```
 
--   Insertion order is not guaranteed, as `object` key enumeration is not specified according to the [ECMAScript specification][ecma-262-for-in]. In practice, however, most engines use insertion order to sort an `object`'s keys, thus allowing for deterministic inversion.
+-   In older JavaScript engines, insertion order is not guaranteed, as object key enumeration was not specified according to the [ECMAScript specification][ecma-262-for-in] in earlier editions. In practice, however, most older engines use insertion order to sort an object's keys, thus allowing for deterministic inversion.
 
 </section>
 
@@ -180,33 +174,25 @@ var out = invertBy( obj, transform );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/math-base-special-round@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/utils-object-inverse-by@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
-
-var keys;
-var arr;
-var out;
-var i;
+```javascript
+var objectKeys = require( '@stdlib/utils-keys' );
+var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
+var invertBy = require( '@stdlib/utils-object-inverse-by' );
 
 function transform( key, value ) {
     return value;
 }
 
-// Create an array of random integers...
-arr = new Array( 1000 );
-for ( i = 0; i < arr.length; i++ ) {
-    arr[ i ] = round( randu()*100.0 );
-}
+// Create an array of random integers:
+var arr = discreteUniform( 1000, 0, 100, {
+    'dtype': 'generic'
+});
+
 // Invert the array to determine value frequency...
-out = invertBy( arr, transform );
-keys = Object.keys( out );
+var out = invertBy( arr, transform );
+var keys = objectKeys( out );
+
+var i;
 for ( i = 0; i < keys.length; i++ ) {
     if ( out[ i ] ) {
         out[ i ] = out[ i ].length;
@@ -215,11 +201,6 @@ for ( i = 0; i < keys.length; i++ ) {
     }
 }
 console.dir( out );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -316,7 +297,7 @@ Copyright &copy; 2016-2025. The Stdlib [Authors][stdlib-authors].
 
 <!-- <related-links> -->
 
-[@stdlib/utils/object-inverse]: https://github.com/stdlib-js/utils-object-inverse/tree/umd
+[@stdlib/utils/object-inverse]: https://github.com/stdlib-js/utils-object-inverse
 
 <!-- </related-links> -->
 
